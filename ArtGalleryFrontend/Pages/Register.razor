@@ -1,0 +1,46 @@
+﻿@page "/register"
+
+
+<div class="col-6 register-container">
+<h2>Register For Our Art <br />Gallery</h2>
+
+   <EditForm  Model="user" OnInvalidSubmit="DisplayName">
+            <DataAnnotationsValidator/>
+                <ValidationSummary/>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+               <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+        <div class="form-group p-2">
+            <label for="name">Name</label>
+
+            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+        </div>
+        <div class="form-group p-2">
+            <label for="name">Name</label>
+
+            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+        </div>
+        <div class="form-group p-2">
+            <label for="name">Name</label>
+
+            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+        </div>
+        <div class="form-group p-2">
+            <label for="name">Name</label>
+
+            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+        </div>
+        <button class="btn btn-primary">Register</button>
+   </EditForm>
+    
+</div>
+
+
+@code{
+    private UserDTO user = new UserDTO();
+    public void DisplayName() {
+        Console.WriteLine(user.UserName);
+    }
+}

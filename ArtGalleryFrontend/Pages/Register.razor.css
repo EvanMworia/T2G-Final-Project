@@ -1,0 +1,11 @@
+﻿.register-container {
+    border: 4px solid magenta;
+    align-items:center;
+    justify-items:center;
+    
+}
+.register-container h2{
+    text-align:center;
+}
+
+
