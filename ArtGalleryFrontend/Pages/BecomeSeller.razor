@@ -1,8 +1,9 @@
-﻿@page "/becomeseller"
+﻿@inject NavigationManager navigationManager
+@page "/becomeseller"
 
-
-<div class="col-6 login-container">
-    <h2>Sign into Our Art <br />Gallery</h2>
+<div class="form-container ">
+    <div class="card shadow col-6 form-structure">
+        <h2 class="form-title">Want to become</h2><h2 class="gold-colored-text form-title">A Seller ?</h2>
 
     <EditForm Model="logUser" OnValidSubmit="DisplayName">
         <DataAnnotationsValidator />
@@ -19,10 +20,12 @@
             <InputText class="form-control p-2" id="name" @bind-Value="logUser.Password" aria-describedby="name" />
         </div>
 
-
-        <button class="btn btn-primary">Log In</button>
+            <div class=" button-container">
+            <button class="form-button" @onclick="registerArtPiece">Proceed => </button>
+            </div>
     </EditForm>
 
+</div>
 </div>
 
 
@@ -32,5 +35,9 @@
     {
         Console.WriteLine(logUser.UserName);
         Console.WriteLine(logUser.Password);
+    }
+    private void registerArtPiece()
+    {
+        navigationManager.NavigateTo("registerArtPiece");
     }
 }

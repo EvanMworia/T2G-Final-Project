@@ -1,0 +1,50 @@
+﻿@page "/registerArtPiece"
+
+<div class="form-container ">
+    <div class="card shadow col-6 form-structure">
+        <h2 class="form-title">Register A Piece For</h2><h2 class="gold-colored-text form-title">Auction</h2>
+
+        <EditForm Model="user" OnInvalidSubmit="DisplayName">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+            <div class="form-group p-2">
+                <label for="name">Name</label>
+
+                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+            </div>
+            <div class=" button-container">
+            <button class="form-button">Register</button>
+            </div>
+        </EditForm>
+
+    </div>
+</div>
+
+
+@code {
+    private UserDTO user = new UserDTO();
+    public void DisplayName()
+    {
+        Console.WriteLine(user.UserName);
+    }
+}

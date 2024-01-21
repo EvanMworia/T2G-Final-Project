@@ -1,8 +1,8 @@
 ﻿@page "/login"
 
-
-<div class="col-6 login-container">
-    <h2>Sign into Our Art <br />Gallery</h2>
+<div class="form-container ">
+<div class="card shadow col-6 form-structure" style="height: 60vh">
+        <h2 class="form-title">Welcome, Sign In To</h2><h2 class="gold-colored-text form-title">Browse The Gallery</h2>
 
     <EditForm Model="logUser" OnValidSubmit="DisplayName">
         <DataAnnotationsValidator />
@@ -18,11 +18,15 @@
 
             <InputText class="form-control p-2" id="name" @bind-Value="logUser.Password" aria-describedby="name" />
         </div>
-        
-        
-        <button class="btn btn-primary">Log In</button>
+
+            <div class=" button-container">
+            <button class="form-button">Log In</button>
+            </div>
+
+        <p>Not Yet A Member?Click Here To <a href="register">Join Us.</a></p>
     </EditForm>
 
+</div>
 </div>
 
 

@@ -102,3 +102,30 @@ code {
     color: #c02d76;
 }
 
+
+
+/*----------------START OF MY OWN GLOBAL CSS CODE--------------------*/
+.form-container {
+    display: grid;
+    place-items: center;
+}
+.form-structure{
+    margin-top: 30px;
+}
+.form-button {
+    color: #C7AE6A;
+    background-color: #1a3500;
+    border-radius: 10px;
+    padding: 10px;
+}
+.form-container .button-container{
+    display:grid;
+    place-items:center;
+    margin-top:30px;
+}
+.gold-colored-text {
+    color: #C7AE6A;
+}
+.form-container .form-title {
+    text-align: center;
+}

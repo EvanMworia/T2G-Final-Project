@@ -1,14 +1,14 @@
 ﻿@page "/"
-
+@inject NavigationManager navigationManager
 <PageTitle>Home</PageTitle>
 <div class="hero-container">
     <div class="hero-content">
 
-        <h1>We Are Like <br />Pablo Picasso's <br />Collection<br /> But On Steroids.</h1>
+        <h1>We Are Like <br />Pablo Picasso's <br />Collection</h1><br /> <h1 class="colored-text"> But On Steroids.</h1>
        <div class="buttons">
 
-        <button class="hero-buttons">Sign Up</button>
-        <button class="hero-buttons">Log In</button>
+        <button class="hero-buttons" @onclick="register">Sign Up</button>
+        <button class="hero-buttons" @onclick="login">Log In</button>
        </div>
     </div>
 </div>
@@ -19,5 +19,91 @@
     <i class="fas fa-search"></i>
 </div>
 
+@*----------------- browse contents on auction area -------------------*@
+<div class="row d-flex flex-row gap-4  ">
+    <h1 class="align-content-center">Weekly Workout Routine</h1>
+    @foreach (var day in days)
+    {
+        <div class="card shadow col-4 p-4 " style="width: 18rem;">
+            <img src="@day.Image" class="card-img-top" alt="@day.Day" />
+            <div class="card-body d-flex flex-column justify-content-center">
+                <h2 class="card-title">@day.Day</h2>
+                <h7>@day.MuscleGroup</h7>
+            
+            </div>
+            <div class="d-flex flex-row gap-2">
+                <button type="button" class="btn btn-primary btn-outline-light btn-sm m-7">Get Workout</button>
 
+                <button type="button" class="btn btn-secondary btn-outline-light btn-sm m-7">Edit Workout</button>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+
+
+@code{
+    private void register()
+    {
+        navigationManager.NavigateTo("register");
+    }
+
+    private void login()
+    {
+        navigationManager.NavigateTo("login");
+    }
+
+
+    //---------------------- sample dummy auction products------------------------
+    public GymDay gymDay { get; set; } = new GymDay();
+    public List<GymDay> days = new List<GymDay>()
+    {
+        new GymDay
+        {
+            Day = "Monday",
+            MuscleGroup= "V-Taper Back",
+            Image ="https://cdn.pixabay.com/photo/2020/04/25/00/19/home-workout-5089047_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "Tuesday",
+            MuscleGroup= "Deep Squats = Big Quads",
+            Image ="https://cdn.pixabay.com/photo/2016/11/19/12/43/barbell-1839087_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "Wednesday",
+            MuscleGroup= "It's Not A Small Vest, It's a Big Chest",
+            Image ="https://cdn.pixabay.com/photo/2013/02/14/22/16/man-81725_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "Thursday",
+            MuscleGroup= "throwBACK Thursdays",
+            Image ="https://cdn.pixabay.com/photo/2017/02/10/11/22/deadlift-2054919_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "Friday",
+            MuscleGroup= "Deltoids On Steroids",
+            Image ="https://cdn.pixabay.com/photo/2020/05/11/22/38/muscle-5160485_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "Saturday",
+            MuscleGroup= "Leg 2.0",
+            Image ="https://cdn.pixabay.com/photo/2018/12/26/08/52/barbell-3895455_640.jpg"
+        },
+        new GymDay
+        {
+            Day = "SunDay",
+            MuscleGroup= "Touch Some Grass FFS",
+            Image ="https://cdn.pixabay.com/photo/2015/12/17/18/00/dog-1097662_640.jpg"
+        }
+
+
+    };
+}
 

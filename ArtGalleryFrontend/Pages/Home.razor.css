@@ -25,6 +25,18 @@
     /*align-items:end;*/
     
 }
+.hero-container .colored-text {
+        color: #C7AE6A;
+    }
+    .hero-container .hero-buttons {
+        color: #C7AE6A;
+        background-color: #1a3500;
+        border-radius:10px;
+        padding:10px;
+        margin-top:40px;
+        margin-right:40px;
+        
+    }
 .search-bar{
     margin-top:50px;
     margin-bottom:50px;

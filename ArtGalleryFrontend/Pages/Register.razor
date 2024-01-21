@@ -1,8 +1,9 @@
-﻿@page "/register"
+﻿@inject NavigationManager navigationManager
+@page "/register"
 
-
-<div class="col-6 register-container">
-<h2>Register For Our Art <br />Gallery</h2>
+<div class="form-container ">
+    <div class="card shadow col-6 form-structure">
+        <h2 class="form-title">Sign Up For Our Art </h2><h2 class="gold-colored-text form-title">Gallery</h2>
 
    <EditForm  Model="user" OnInvalidSubmit="DisplayName">
             <DataAnnotationsValidator/>
@@ -32,9 +33,12 @@
 
             <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
         </div>
-        <button class="btn btn-primary">Register</button>
+        <div class=" button-container">
+            <button class="form-button" @onclick="login">Register</button>
+        </div>
    </EditForm>
     
+</div>
 </div>
 
 
@@ -42,5 +46,10 @@
     private UserDTO user = new UserDTO();
     public void DisplayName() {
         Console.WriteLine(user.UserName);
+    }
+
+    private void login()
+    {
+        navigationManager.NavigateTo("login"); 
     }
 }
