@@ -1,0 +1,82 @@
+﻿@* --------------will later display a page depending on the id and contents of that id--------- *@
+@* ------------thats wehen we will use the routing by fetching id -------------- *@
+
+
+@* @page "/placebid/{id}" *@
+@page "/placebid"
+
+<div class="auction-container">
+    <div class="left-section">
+        <div class="big-display-picture">
+            @* <img src="@artPiece.Image[imageIndex]" /> *@
+        </div>
+        <div class="additional-images">
+            <img src="/images/pexels-alena-koval-886521.jpg" alt="">
+            <img src="/images/pexels-alena-koval-886521.jpg" alt="">
+            <img src="/images/pexels-alena-koval-886521.jpg" alt="">
+            <img src="/images/pexels-alena-koval-886521.jpg" alt="">
+            <!-- Include four small image containers here -->
+        </div>
+    </div>
+    <div class="right-section">
+        <div class="product-info">
+            <p>Time Left: <span id="time-left">2 days</span></p>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <div class="bid-section">
+                <label for="bid-amount">Place Your Bid:</label>
+                <input type="text" id="bid-amount" name="bid-amount" placeholder="Enter bid amount">
+                <button type="button" onclick="submitBid()">Submit Bid</button>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    //-----------------USED FOR GETTING PAGE BY ID and populating image by index------------------
+        //------------Even the last OVVERRIDE METHOD (BOTTOM)------------------------
+    // [Parameter]
+    // public int id { get; set; }
+    // public ArtProduct artPiece { get; set; } = new ArtProduct();
+    // public int imageIndex { get; set; } = 0;
+
+    public List<ArtProduct> artpieces = new List<ArtProduct>()
+    {
+        new ArtProduct
+        {
+            Id=1,
+            Name = "Deez",
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+            Image ="https://images.pexels.com/photos/159862/art-school-of-athens-raphael-italian-painter-fresco-159862.jpeg?auto=compress&cs=tinysrgb&w=600"
+        },
+        new ArtProduct
+        {
+             Id=2,
+            Name = "Nutz",
+             Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+
+            Image ="https://images.pexels.com/photos/20967/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
+        },
+        new ArtProduct
+        {
+            Id=3,
+            Name = "GOT EM",
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+
+            Image ="https://imgs.search.brave.com/7cVarpCPPkncVp53pa7GCzFBlhffFy-ZlHF0LuXDoSA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a2JtNzAuanBn"
+        },
+        new ArtProduct
+        {
+            Id=4,
+            Name = "Haha Got eeemmm!",
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+            Image ="https://imgs.search.brave.com/iDujDpr8HoyvEokaVXLgu1gjAfRLo6U5TPVYJMux4GY/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a21jMXguanBn"
+        }
+    };
+    //--------------------------------------------------------------------------------
+    // protected override void OnInitialized()
+    // {
+    //     artPiece = artpieces.Find(piece => piece.Id == id);
+    // }
+
+   
+
+}

@@ -54,3 +54,23 @@
     height:7vh;
     width:40vw;
 }
+.hot-deals{
+    margin-left:50px;
+}
+.hot-deals-card-title {
+    text-align: center;
+    color: #2D4739;
+}
+.card .card-body h7{
+    text-align:center;
+    font-style:italic;
+}
+.card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 20px rgb(0,0,0,0.1)
+}
+.card .card-button-container  {
+    display: grid;
+    place-items:center;
+}

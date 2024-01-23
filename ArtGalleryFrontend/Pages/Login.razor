@@ -1,40 +1,72 @@
 ﻿@page "/login"
+@inject UserStateService _stateService
+@inject NavigationManager _navigate
+@* inject http client *@
+
+@inject HttpClient _httpClient
 
 <div class="form-container ">
-<div class="card shadow col-6 form-structure" style="height: 60vh">
-        <h2 class="form-title">Welcome, Sign In To</h2><h2 class="gold-colored-text form-title">Browse The Gallery</h2>
+    <div class="card shadow col-6 form-structure" style="height: 60vh">
+            <h2 class="form-title">Welcome, Sign In To</h2><h2 class="gold-colored-text form-title">Browse The Gallery</h2>
 
-    <EditForm Model="logUser" OnValidSubmit="DisplayName">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-        <div class="form-group p-2">
-            <label for="name">UserName:</label>
+        <EditForm Model="logUser" OnValidSubmit="LoginUser">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form-group p-2">
+                <label for="name">UserName:</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="logUser.UserName" aria-describedby="name" />
-        </div>
+                <InputText class="form-control p-2" id="name" @bind-Value="logUser.UserName" aria-describedby="name" />
+            </div>
         
-        <div class="form-group p-2">
-            <label for="name">Password:</label>
+            <div class="form-group p-2">
+                <label for="name">Password:</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="logUser.Password" aria-describedby="name" />
-        </div>
-
-            <div class=" button-container">
-            <button class="form-button">Log In</button>
+                <InputText class="form-control p-2" id="name" @bind-Value="logUser.Password" aria-describedby="name" />
             </div>
 
-        <p>Not Yet A Member?Click Here To <a href="register">Join Us.</a></p>
-    </EditForm>
+                <div class=" button-container">
+                <button class="form-button">Log In</button>
+                </div>
 
-</div>
+        </EditForm>
+
+    </div>
+            <p>Not Yet A Member?Click Here To <a href="register">Join Us.</a></p>
 </div>
 
 
 @code {
     private LoginRequestDTO logUser = new LoginRequestDTO();
-    public void DisplayName()
+    private List<UserDTO> users = new List<UserDTO>();
+
+    protected override async Task OnInitializedAsync()
     {
-        Console.WriteLine(logUser.UserName);
-        Console.WriteLine(logUser.Password);
+        var usersData = await _httpClient.GetFromJsonAsync<List<UserDTO>>("sample-data/users.json");
+        if (usersData.Any())
+        {  
+            users = usersData;        }   
+
     }
+    public void LoginUser()
+    {
+        var user = users.Find(user => user.UserName == logUser.UserName);
+        if (user == null)
+        {
+            Console.WriteLine("Invalid Credentials");
+
+        }
+
+        if (user.Role == "admin")
+        {
+            _stateService.SetRoleAdmin();
+            _navigate.NavigateTo("/dashboard");
+        }
+        else
+        {
+            _stateService.SetRoleUser(); 
+            _navigate.NavigateTo("/");
+        }
+        
+    }
+   
 }

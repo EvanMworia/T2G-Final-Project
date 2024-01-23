@@ -16,25 +16,31 @@
 <div class="search-bar">
 
     <input  type="type" name="search" value="" placeholder="Search Items...."/>
-    <i class="fas fa-search"></i>
+    
 </div>
 
 @*----------------- browse contents on auction area -------------------*@
 <div class="row d-flex flex-row gap-4  ">
-    <h1 class="align-content-center">Weekly Workout Routine</h1>
-    @foreach (var day in days)
+    <div class="hot-deals">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-fire" viewBox="0 0 16 16">
+            <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15" />
+        </svg>
+        
+        <i class="bi bi-fire hot-deals-icon"></i>
+        <h2 class="gold-colored-text ">HOT</h2><h2>DEALS</h2> 
+    </div>
+    @foreach (var piece in artpieces)
     {
         <div class="card shadow col-4 p-4 " style="width: 18rem;">
-            <img src="@day.Image" class="card-img-top" alt="@day.Day" />
+            <img src="@piece.Image" class="card-img-top" alt="@piece.Name" />
             <div class="card-body d-flex flex-column justify-content-center">
-                <h2 class="card-title">@day.Day</h2>
-                <h7>@day.MuscleGroup</h7>
+                <h2 class="hot-deals-card-title">@piece.Name</h2>
+                <h7>@piece.Description</h7>
             
             </div>
-            <div class="d-flex flex-row gap-2">
-                <button type="button" class="btn btn-primary btn-outline-light btn-sm m-7">Get Workout</button>
-
-                <button type="button" class="btn btn-secondary btn-outline-light btn-sm m-7">Edit Workout</button>
+            <div class="card-button-container">
+                @* <button  class="btn btn-outline-success" @onclick="() => placebid(piece.Id)">See Details</button> *@
+                <button class="btn btn-outline-success" @onclick="placebid">See Details</button>
             </div>
         </div>
 
@@ -54,54 +60,53 @@
     {
         navigationManager.NavigateTo("login");
     }
-
+    //----REMBER TO PASS A PARAMETER OF ID
+    // private void placebid(int id)
+     private void placebid()
+    {
+        //------NOTE TO SELF---------
+        //----REMEMBER TO SWITCH PAGES DEPENDING ON PRODUCTS ID----
+        //----INORDER TO ALWAYS HIT A DIFFERENT PAGE EVERY TIME------
+        navigationManager.NavigateTo("placebid");
+        // navigationManager.NavigateTo($"placebid/{id}");
+    }
 
     //---------------------- sample dummy auction products------------------------
-    public GymDay gymDay { get; set; } = new GymDay();
-    public List<GymDay> days = new List<GymDay>()
+    public ArtProduct artProduct { get; set; } = new ArtProduct();
+    public List<ArtProduct> artpieces = new List<ArtProduct>()
     {
-        new GymDay
+        new ArtProduct
         {
-            Day = "Monday",
-            MuscleGroup= "V-Taper Back",
-            Image ="https://cdn.pixabay.com/photo/2020/04/25/00/19/home-workout-5089047_640.jpg"
+            Id=1,
+            Name = "Deez",   
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+            Image ="https://images.pexels.com/photos/159862/art-school-of-athens-raphael-italian-painter-fresco-159862.jpeg?auto=compress&cs=tinysrgb&w=600"
         },
-        new GymDay
+        new ArtProduct
         {
-            Day = "Tuesday",
-            MuscleGroup= "Deep Squats = Big Quads",
-            Image ="https://cdn.pixabay.com/photo/2016/11/19/12/43/barbell-1839087_640.jpg"
+             Id=2,
+            Name = "Nutz",
+             Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+
+            Image ="https://images.pexels.com/photos/20967/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
         },
-        new GymDay
+        new ArtProduct
         {
-            Day = "Wednesday",
-            MuscleGroup= "It's Not A Small Vest, It's a Big Chest",
-            Image ="https://cdn.pixabay.com/photo/2013/02/14/22/16/man-81725_640.jpg"
+            Id=3,
+            Name = "GOT EM",
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+
+            Image ="https://imgs.search.brave.com/7cVarpCPPkncVp53pa7GCzFBlhffFy-ZlHF0LuXDoSA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a2JtNzAuanBn"
         },
-        new GymDay
+        new ArtProduct
         {
-            Day = "Thursday",
-            MuscleGroup= "throwBACK Thursdays",
-            Image ="https://cdn.pixabay.com/photo/2017/02/10/11/22/deadlift-2054919_640.jpg"
-        },
-        new GymDay
-        {
-            Day = "Friday",
-            MuscleGroup= "Deltoids On Steroids",
-            Image ="https://cdn.pixabay.com/photo/2020/05/11/22/38/muscle-5160485_640.jpg"
-        },
-        new GymDay
-        {
-            Day = "Saturday",
-            MuscleGroup= "Leg 2.0",
-            Image ="https://cdn.pixabay.com/photo/2018/12/26/08/52/barbell-3895455_640.jpg"
-        },
-        new GymDay
-        {
-            Day = "SunDay",
-            MuscleGroup= "Touch Some Grass FFS",
-            Image ="https://cdn.pixabay.com/photo/2015/12/17/18/00/dog-1097662_640.jpg"
+            Id=4,
+            Name = "Haha Got eeemmm!",
+            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+            Image ="https://imgs.search.brave.com/iDujDpr8HoyvEokaVXLgu1gjAfRLo6U5TPVYJMux4GY/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a21jMXguanBn"
         }
+       
+        
 
 
     };

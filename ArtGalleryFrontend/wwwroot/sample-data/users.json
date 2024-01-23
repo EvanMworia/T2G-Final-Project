@@ -1,0 +1,18 @@
+[
+  {
+    "Id":  1,
+    "FullNames": "Brian Gakure",
+    "UserName": "Kush",
+    "Email": "brian@dummy.com",
+    "Role":  "user"
+
+  },
+  {
+
+    "Id": 2,
+    "FullNames": "Evans Githinji",
+    "UserName": "Evanso",
+    "Email": "evans@dummy.com",
+    "Role": "admin"
+  }
+]
