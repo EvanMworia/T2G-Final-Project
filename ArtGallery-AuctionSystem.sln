@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34310.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGalleryFrontend", "ArtGalleryFrontend\ArtGalleryFrontend.csproj", "{041CCDBF-7139-4567-90CC-B98F9E792702}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthMS", "AuthMS\AuthMS.csproj", "{6A116D19-2933-47B1-B66E-E2CFA7376063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{041CCDBF-7139-4567-90CC-B98F9E792702}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{041CCDBF-7139-4567-90CC-B98F9E792702}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{041CCDBF-7139-4567-90CC-B98F9E792702}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A116D19-2933-47B1-B66E-E2CFA7376063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A116D19-2933-47B1-B66E-E2CFA7376063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A116D19-2933-47B1-B66E-E2CFA7376063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A116D19-2933-47B1-B66E-E2CFA7376063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
