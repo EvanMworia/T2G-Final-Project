@@ -1,5 +1,7 @@
 using AuthMS.Data;
 using AuthMS.Models;
+using AuthMS.Services;
+using AuthMS.Services.Iservices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +23,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString"));
 });
+//-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
+builder.Services.AddScoped<IAuth, AuthService>();
+
+//------4. AUTO MAPPER--------------------
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 var app = builder.Build();
