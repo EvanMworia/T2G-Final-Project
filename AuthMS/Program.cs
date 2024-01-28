@@ -1,4 +1,5 @@
 using AuthMS.Data;
+using AuthMS.Extensions;
 using AuthMS.Models;
 using AuthMS.Services;
 using AuthMS.Services.Iservices;
@@ -38,6 +39,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+//------REGISTER OUR SERVICE FOR AUTOMATIC PENDING MIGRATIONS TO BE APPLIED 
+app.UseMigrations();
+//----------------
 
 app.UseHttpsRedirection();
 

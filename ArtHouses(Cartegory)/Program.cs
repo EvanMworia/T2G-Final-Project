@@ -1,10 +1,8 @@
-using ArtProducts.Database;
-using ArtProducts.Services;
-using ArtProducts.Services.IServices;
-using AuthMS.Extensions;
-using Microsoft.AspNetCore.Identity;
+using ArtHouses_Cartegory_.Database;
+using ArtHouses_Cartegory_.Extensions;
+using ArtHouses_Cartegory_.Services;
+using ArtHouses_Cartegory_.Services.IServices;
 using Microsoft.EntityFrameworkCore;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +21,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString"));
 });
 //-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
-builder.Services.AddScoped<IProducts, ProductServices>();
+builder.Services.AddScoped<ICategory, CategoryService>();
 
 //------4. AUTO MAPPER--------------------
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 var app = builder.Build();
 
@@ -37,12 +34,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-
 //------REGISTER OUR SERVICE FOR AUTOMATIC PENDING MIGRATIONS TO BE APPLIED 
 app.UseMigrations();
 //----------------
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

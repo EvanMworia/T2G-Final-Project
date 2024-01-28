@@ -1,0 +1,6 @@
+@ArtHouses_Cartegory__HostAddress = http://localhost:5286
+
+GET {{ArtHouses_Cartegory__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

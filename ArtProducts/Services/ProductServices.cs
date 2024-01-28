@@ -4,6 +4,7 @@ using ArtProducts.Models.DTOs;
 using ArtProducts.Services.IServices;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ArtProducts.Services
 {
@@ -43,9 +44,17 @@ namespace ArtProducts.Services
 
         }
 
-        public Task<string> DeleteArtPiece(Guid id)
+        public async Task<string> DeleteArtPiece(ArtPiece piece)
         {
-            throw new NotImplementedException();
+             _context.ArtPieces.Remove(piece);
+            await _context.SaveChangesAsync();
+            return "Piece Deleted successfully";
+        }
+
+        public async Task<List<ArtPiece>> GetAllArtPieces()
+        {
+            return await _context.ArtPieces.ToListAsync();
+            
         }
 
         public async Task<ArtPiece> GetArtPieceById(Guid id)
