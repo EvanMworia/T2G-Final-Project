@@ -11,18 +11,32 @@ namespace ArtHouses_Cartegory_.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
+        private readonly ResponseDTO _response;
+
         public CategoryService(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _response = new ResponseDTO();
             
         }
-        public async Task<string> AddCategory(CategoryDTO categoryDTO)
+        public async Task<ResponseDTO> AddCategory(CategoryDTO categoryDTO)
         {
-            var mappedCategory = _mapper.Map<Category>(categoryDTO);
-            await _context.Categories.AddAsync(mappedCategory);
-            await _context.SaveChangesAsync();
-            return "Category Saved";
+            try
+            {
+
+                var mappedCategory = _mapper.Map<Category>(categoryDTO);
+                await _context.Categories.AddAsync(mappedCategory);
+                await _context.SaveChangesAsync();
+                _response.Message = "category added successfully";
+                _response.Result = mappedCategory;
+                return _response;
+            }
+            catch (Exception ex) 
+            {
+                _response.Message = ex.Message;
+                return _response;
+            }  
         }
 
         public async Task<string> DeleteCategory(Category category)

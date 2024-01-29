@@ -5,7 +5,7 @@ namespace ArtHouses_Cartegory_.Services.IServices
 {
     public interface ICategory
     {
-        public Task<string> AddCategory(CategoryDTO categoryDTO);
+        public Task<ResponseDTO> AddCategory(CategoryDTO categoryDTO);
         public Task<Category> GetCategory(Guid id);
         public Task<List<Category>> GetAllCategories();
         public Task<string> UpdateCategory();
