@@ -72,6 +72,31 @@ namespace ArtHouses_Cartegory_.Controllers
             
 
         }
+        //[HttpDelete]
+        //public async Task<ActionResult<ResponseDTO>> DeleteCategory(Guid Id)
+        //{
+        //    var result = _service.GetCategory(Id);
+        //    var mapped = _mapper.Map<Category>(result);
+        //    var res = await _service.DeleteCategory(Id);
+        //    _response.Result = res;
+        //    return Ok(_response);
 
+        //}
+        //[HttpPut]
+        //public async Task<ActionResult<ResponseDTO>> UpdateCategory(Guid id, UpdateCategoryDTO categoryDTO)
+        //{
+        //    var category = await _service.GetCategory(id);
+        //    if (category==null)
+        //    {
+        //        _response.Message = "Check the Id and try again";
+        //        _response.Result = category;
+        //        return NotFound(_response);
+        //    }
+        //    var mapped =_mapper.Map<UpdateCategoryDTO>(category);
+        //    var result = await _service.UpdateCategory(mapped);
+            
+        //    return Ok(_response);
+
+        //}
     }
 }

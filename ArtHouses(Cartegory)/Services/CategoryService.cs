@@ -39,12 +39,12 @@ namespace ArtHouses_Cartegory_.Services
             }  
         }
 
-        public async Task<string> DeleteCategory(Category category)
-        {
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
-            return "Category has been deleted successfully";
-        }
+        //public async Task<string> DeleteCategory(Guid Id)
+        //{
+        //    _context.Categories.Remove(Id);
+        //    await _context.SaveChangesAsync();
+        //    return "Category has been deleted successfully";
+        //}
 
         public async Task<List<Category>> GetAllCategories()
         {
@@ -59,12 +59,13 @@ namespace ArtHouses_Cartegory_.Services
             return mappedResult;
         }
 
-        public async Task<string> UpdateCategory()
-        {
-            await _context.SaveChangesAsync();
-            return "Updated Successfully";
-
-        }
+        //public async Task<string> UpdateCategory(UpdateCategoryDTO categoryDTO)
+        //{
+           
+        //    await _context.SaveChangesAsync();
+        //    return "Updated Successfully";
+         
+        //}
 
         
     }

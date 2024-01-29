@@ -8,7 +8,8 @@ namespace ArtHouses_Cartegory_.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<CategoryDTO, Category>();
+            CreateMap<CategoryDTO, Category>().ReverseMap();
+            
         }
     }
 }

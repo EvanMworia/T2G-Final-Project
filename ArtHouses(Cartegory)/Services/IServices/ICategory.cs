@@ -8,8 +8,8 @@ namespace ArtHouses_Cartegory_.Services.IServices
         public Task<ResponseDTO> AddCategory(CategoryDTO categoryDTO);
         public Task<Category> GetCategory(Guid id);
         public Task<List<Category>> GetAllCategories();
-        public Task<string> UpdateCategory();
-        public Task<string> DeleteCategory(Category category);
+        //public Task<string> UpdateCategory(UpdateCategoryDTO categoryDTO);
+        //public Task<string> DeleteCategory(Guid Id);
         
     }
 }

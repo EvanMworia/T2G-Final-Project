@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGalleryFrontend", "ArtGa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthMS", "AuthMS\AuthMS.csproj", "{6A116D19-2933-47B1-B66E-E2CFA7376063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtGallery_ServiceBus", "ArtGallery_ServiceBus\ArtGallery_ServiceBus.csproj", "{BCD1AAFD-8A0A-4A51-BBFC-410C2F8AF280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtGallery_ServiceBus", "ArtGallery_ServiceBus\ArtGallery_ServiceBus.csproj", "{BCD1AAFD-8A0A-4A51-BBFC-410C2F8AF280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtProducts", "ArtProducts\ArtProducts.csproj", "{C41FF72D-4F26-48B6-BAB7-35E050084129}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtProducts", "ArtProducts\ArtProducts.csproj", "{C41FF72D-4F26-48B6-BAB7-35E050084129}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtHouses(Cartegory)", "ArtHouses(Cartegory)\ArtHouses(Cartegory).csproj", "{C282E900-3E56-44F7-BC16-AB9F1CD34446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtHouses(Cartegory)", "ArtHouses(Cartegory)\ArtHouses(Cartegory).csproj", "{C282E900-3E56-44F7-BC16-AB9F1CD34446}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiddingMS", "BiddingMS\BiddingMS.csproj", "{CD6019D4-C538-4B8E-AA2B-8644188DCA24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C282E900-3E56-44F7-BC16-AB9F1CD34446}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C282E900-3E56-44F7-BC16-AB9F1CD34446}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C282E900-3E56-44F7-BC16-AB9F1CD34446}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD6019D4-C538-4B8E-AA2B-8644188DCA24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD6019D4-C538-4B8E-AA2B-8644188DCA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD6019D4-C538-4B8E-AA2B-8644188DCA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD6019D4-C538-4B8E-AA2B-8644188DCA24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
