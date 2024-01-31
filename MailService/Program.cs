@@ -1,7 +1,7 @@
-using BiddingMS.Data;
-using BiddingMS.Extensions;
-using BiddingMS.Services;
-using BiddingMS.Services.IService;
+using MailService.Data;
+using MailService.Extensions;
+using MailService.Messaging;
+using MailService.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,19 +13,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//---------------Configuring connectionString to our database-------
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString"));
 });
-//-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
-builder.Services.AddScoped<IBidding, BiddingService>();
 
-//------4. AUTO MAPPER--------------------
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//changing the above service to SingleTon
+var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("myConnString"));
+builder.Services.AddSingleton(new EmailService(optionsBuilder.Options));
+
+//
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
 
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,8 +35,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMigrations();
+
 app.UseHttpsRedirection();
+app.useAzure();
 
 app.UseAuthorization();
 

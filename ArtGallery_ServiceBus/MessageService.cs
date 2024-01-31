@@ -12,7 +12,7 @@ namespace ArtGallery_ServiceBus
     public class MessageService: IMessage
     {
         //  <---- SET THE PRIMARY CONECTION STRING  ---->
-        private readonly string _connectionString = "Endpoint=sb://e-commerceservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=XYIxyLC7JDGFdLK/OlxkmrZqUVgJb+Hlz+ASbKJ4Tqk=";
+        private readonly string _connectionString = "Endpoint=sb://artgalleryservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=1ojL9Xv22RZUY/az2SpalDlwIoUnjgekR+ASbJIx6ZA=";
         public async Task PublishMessage(object message, string queueName)
         {
             

@@ -1,7 +1,9 @@
-using BiddingMS.Data;
-using BiddingMS.Extensions;
-using BiddingMS.Services;
-using BiddingMS.Services.IService;
+using AuthService.Data;
+using AuthService.Models;
+using AuthService.Services;
+using AuthService.Services.IServices;
+using AuthService.Utilities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,19 +15,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//---------------Configuring connectionString to our database-------
+//service for connectiong to DB
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("myConnString"));
 });
-//-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
-builder.Services.AddScoped<IBidding, BiddingService>();
 
-//------4. AUTO MAPPER--------------------
+//configure Identity Framework
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+//Add Auto Mapper
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-var app = builder.Build();
+//our Services
+builder.Services.AddScoped<IUser, UserService>();
+builder.Services.AddScoped<IJwt,JwtService>();
 
+//configure JWTOptions Class
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,7 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMigrations();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
