@@ -1,5 +1,6 @@
 ﻿using BiddingMS.Models.DTOs;
 using BiddingMS.Services.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +18,7 @@ namespace BiddingMS.Controllers
             _responseDTO = new ResponseDTO();
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ResponseDTO>> PlaceBid(AddBidDTO dto)
         {
            var result = await _bidService.PlaceBid(dto);

@@ -2,6 +2,7 @@
 using ArtProducts.Models.DTOs;
 using ArtProducts.Services.IServices;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,6 +62,7 @@ namespace ArtProducts.Controllers
 
         }
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ResponseDTO>> GetAllProducts()
         {
             var products = await _products.GetAllArtPieces();

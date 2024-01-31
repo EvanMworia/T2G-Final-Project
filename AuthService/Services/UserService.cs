@@ -95,14 +95,14 @@ namespace AuthService.Services
                 {
 
                     ////does the role exist 
-                    //if (!_roleManager.RoleExistsAsync(userDto.Role).GetAwaiter().GetResult())
-                    //{
-                    //    //create the role 
-                    //    await _roleManager.CreateAsync(new IdentityRole(userDto.Role));
-                    //}
+                    if (!_roleManager.RoleExistsAsync(userDto.Role).GetAwaiter().GetResult())
+                    {
+                        //create the role 
+                        await _roleManager.CreateAsync(new IdentityRole(userDto.Role));
+                    }
 
-                    ////assign the user the role
-                    //await _userManager.AddToRoleAsync(user, userDto.Role);
+                    //assign the user the role
+                    await _userManager.AddToRoleAsync(user, userDto.Role);
                     return string.Empty;
                 }
                 else

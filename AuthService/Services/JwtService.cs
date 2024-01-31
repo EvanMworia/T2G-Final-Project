@@ -27,8 +27,11 @@ namespace AuthService.Services
 
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Name, user.Name));
+            
+
             //Adding a list of roles in our payload
-            claims.AddRange(Roles.Select(x=>new Claim(ClaimTypes.Role, x)));
+            claims.AddRange(Roles.Select(role=>new Claim(ClaimTypes.Role, role)));
 
             var tokendescriptor = new SecurityTokenDescriptor()
             {

@@ -19,6 +19,6 @@ namespace AuthService.Models.Dtos
         [Required]
         public string PhoneNumber { get; set; } = string.Empty;
 
-        public string ? Role{ get; set; } ="User";
+        public string ? Role{ get; set; } ="Bidder";
     }
 }

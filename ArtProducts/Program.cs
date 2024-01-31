@@ -1,4 +1,5 @@
 using ArtProducts.Database;
+using ArtProducts.Extensions;
 using ArtProducts.Services;
 using ArtProducts.Services.IServices;
 using AuthMS.Extensions;
@@ -14,6 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.AddAuth();
+builder.AddSwaggenGenExtension();
 
 //----------REGISTERING OUR SERVICES FOR DEPENDENCY INJECTION------------------
 
@@ -44,7 +47,7 @@ app.UseMigrations();
 //----------------
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
