@@ -23,6 +23,7 @@ namespace ArtProducts.Controllers
             _response = new ResponseDTO();
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<ResponseDTO>> RegisterPiece(AddArtPieceDTO artPieceDTO)
         { 
             var response = await _products.AddArtProduct(artPieceDTO);
@@ -30,6 +31,7 @@ namespace ArtProducts.Controllers
             return Created("", response);
         }
         [HttpGet("SingleProduct/{ProductId}")]
+        [Authorize]
         public async Task<ActionResult<ResponseDTO>> GetSingleProduct(Guid ProductId)
         {
             var result = await _products.GetArtPieceById(ProductId);
@@ -46,6 +48,7 @@ namespace ArtProducts.Controllers
             return NotFound(_response);
         }
         [HttpDelete]
+        [Authorize]
         public async Task<ActionResult<ResponseDTO>> DeleteProduct(Guid ProductId)
         {
             var result= await _products.GetArtPieceById(ProductId);

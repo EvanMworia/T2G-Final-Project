@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtProducts.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240126110154_newupdate")]
-    partial class newupdate
+    [Migration("20240201111426_newcommit")]
+    partial class newcommit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace ArtProducts.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("HighestBid")
+                        .HasColumnType("float");
+
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -46,8 +49,15 @@ namespace ArtProducts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StartBidPrice")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SellerID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("StartBidPrice")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()

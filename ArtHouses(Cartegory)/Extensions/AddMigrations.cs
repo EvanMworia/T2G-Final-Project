@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ArtHouses_Cartegory_.Extensions
 {
-    static class ApplyMigrations
+    static class AddMigrations
     {
         public static IApplicationBuilder UseMigrations(this IApplicationBuilder app)
         {

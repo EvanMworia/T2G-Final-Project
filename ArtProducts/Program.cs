@@ -28,6 +28,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
 builder.Services.AddScoped<IProducts, ProductServices>();
 
+
 //------4. AUTO MAPPER--------------------
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
