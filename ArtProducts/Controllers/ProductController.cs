@@ -2,6 +2,7 @@
 using ArtProducts.Models.DTOs;
 using ArtProducts.Services.IServices;
 using AutoMapper;
+using BiddingMS.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,7 @@ namespace ArtProducts.Controllers
             return Created("", response);
         }
         [HttpGet("SingleProduct/{ProductId}")]
-        [Authorize]
+        /*[Authorize]*/
         public async Task<ActionResult<ResponseDTO>> GetSingleProduct(Guid ProductId)
         {
             var result = await _products.GetArtPieceById(ProductId);
@@ -73,6 +74,18 @@ namespace ArtProducts.Controllers
             _response.isSuccess = true;
             _response.Result = products;
             return Ok(_response);
+        }
+        [HttpPut("{Id}")]
+        
+        public async Task<ActionResult<ResponseDTO>> UpdateHighestBid(Guid Id, HighestBid highestBid)
+        {
+            bool isSuccess =await _products.UpdateHighestBid(Id, highestBid.amount);
+            if (isSuccess) {
+                _response.Message = "Product Highest Bid Updated Successfully";
+            return Ok(_response);
+            }
+            _response.Message = "Product not found";
+            return NotFound(_response);
         }
     }
 }

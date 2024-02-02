@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //-------3. OUR INTERFACES AND THEIR SERVICE IMPLEMENTATION
 builder.Services.AddScoped<IBidding, BiddingService>();
 builder.Services.AddScoped<IProduct, ProductService>();
+// Base_url/{prodct_id}/{amount}
 
 //------4. AUTO MAPPER--------------------
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

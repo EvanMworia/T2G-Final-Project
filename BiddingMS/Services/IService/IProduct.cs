@@ -1,10 +1,13 @@
 ﻿using BiddingMS.Models.DTOs;
 
+
+
 namespace BiddingMS.Services.IService
 {
     public interface IProduct
     {
-        Task<ResponseDTO> GetProductById();
-        Task<ResponseDTO> GetAllProducts(Guid productId);
+        Task<ArtPieceResponseDto> GetProductById(Guid productId);
+        Task<ResponseDTO> GetAllProducts();
+        Task CheckHighestBid(Guid productId, HighestBid highestBid);
     }
 }

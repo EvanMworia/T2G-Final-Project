@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtProducts", "ArtProducts\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArtHouses(Cartegory)", "ArtHouses(Cartegory)\ArtHouses(Cartegory).csproj", "{C282E900-3E56-44F7-BC16-AB9F1CD34446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiddingMS", "BiddingMS\BiddingMS.csproj", "{CD6019D4-C538-4B8E-AA2B-8644188DCA24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiddingMS", "BiddingMS\BiddingMS.csproj", "{CD6019D4-C538-4B8E-AA2B-8644188DCA24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{91CA159B-6599-40EB-A7EF-B8C5DA57C2D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "AuthService\AuthService.csproj", "{91CA159B-6599-40EB-A7EF-B8C5DA57C2D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailService", "MailService\MailService.csproj", "{CB722C9D-E8FD-4D6E-94B5-BF3070B73B6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailService", "MailService\MailService.csproj", "{CB722C9D-E8FD-4D6E-94B5-BF3070B73B6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

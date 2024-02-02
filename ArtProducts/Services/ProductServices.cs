@@ -3,6 +3,7 @@ using ArtProducts.Models;
 using ArtProducts.Models.DTOs;
 using ArtProducts.Services.IServices;
 using AutoMapper;
+using BiddingMS.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -27,6 +28,7 @@ namespace ArtProducts.Services
             try
             {
                 var artPiece = _mapper.Map<ArtPiece>(addPieceDTO);
+                artPiece.HighestBid = addPieceDTO.StartBidPrice;
                  _context.ArtPieces.Add(artPiece);
                 await _context.SaveChangesAsync();
                 _responseDTO.Message = "Art Piece Added Successfully";
@@ -62,5 +64,20 @@ namespace ArtProducts.Services
             return await _context.ArtPieces.Where(x=> x.PieceId == id).FirstOrDefaultAsync();
 
         }
+
+        public async Task<bool> UpdateHighestBid(Guid productId,double amount)
+        {
+           ArtPiece artPiece = await GetArtPieceById(productId);
+            if (artPiece!=null)
+            {
+                artPiece.HighestBid = amount;
+                await _context.SaveChangesAsync();
+                return true;  
+            }
+                return false;
+
+        }
+
+        
     }
 }

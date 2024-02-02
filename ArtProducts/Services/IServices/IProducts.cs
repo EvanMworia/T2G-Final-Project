@@ -1,5 +1,6 @@
 ﻿using ArtProducts.Models;
 using ArtProducts.Models.DTOs;
+using BiddingMS.Models.DTOs;
 
 namespace ArtProducts.Services.IServices
 {
@@ -9,5 +10,6 @@ namespace ArtProducts.Services.IServices
         Task<ArtPiece> GetArtPieceById(Guid id);
         Task<List<ArtPiece>> GetAllArtPieces();
         Task<string> DeleteArtPiece(ArtPiece piece);
+        Task<bool> UpdateHighestBid(Guid productId, double amount);
     }
 }
