@@ -6,8 +6,8 @@ namespace AuthService.Models.Dtos
     {
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty; //might comment this out later
 
-  
         public string Email { get; set; } = string.Empty;
 
         public string PhoneNumber { get; set; } = string.Empty;

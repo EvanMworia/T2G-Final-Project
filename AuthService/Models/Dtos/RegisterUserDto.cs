@@ -7,6 +7,8 @@ namespace AuthService.Models.Dtos
 
         [Required]
         public string Name { get; set; }=string.Empty;
+        [Required]
+        public string UserName {  get; set; }=string.Empty; //might comment this out later
 
         [Required]
         [EmailAddress]

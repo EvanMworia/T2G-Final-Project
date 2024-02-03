@@ -8,8 +8,8 @@ namespace AuthService.Profiles
     {
         public AuthProfiles()
         {
-            CreateMap<RegisterUserDto, ApplicationUser>()
-                .ForMember(dest=>dest.UserName, src=>src.MapFrom(r=>r.Email));
+            CreateMap<RegisterUserDto, ApplicationUser>(); //-------might uncomment this 
+                //.ForMember(dest=>dest.UserName, src=>src.MapFrom(r=>r.Email));
 
             CreateMap<UserDto, ApplicationUser>().ReverseMap();
         }
