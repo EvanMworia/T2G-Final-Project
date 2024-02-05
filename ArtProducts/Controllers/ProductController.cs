@@ -48,23 +48,7 @@ namespace ArtProducts.Controllers
             _response.Message = "Product Not Found";
             return NotFound(_response);
         }
-        [HttpDelete]
-        [Authorize]
-        public async Task<ActionResult<ResponseDTO>> DeleteProduct(Guid ProductId)
-        {
-            var result= await _products.GetArtPieceById(ProductId);
-            if (result==null)
-            {
-                _response.Result = "No Product was found associated with that ID";
-                return NotFound(_response);
-                
-            }
-            var returnValue = await _products.DeleteArtPiece( result);
-            _response.Result = returnValue;
-            _response.isSuccess=true;
-            return Ok(_response);
-
-        }
+       
         [HttpGet]
         [Authorize]
         public async Task<ActionResult<ResponseDTO>> GetAllProducts()
@@ -83,9 +67,26 @@ namespace ArtProducts.Controllers
             if (isSuccess) {
                 _response.Message = "Product Highest Bid Updated Successfully";
             return Ok(_response);
-            }
+            } 
             _response.Message = "Product not found";
             return NotFound(_response);
+        }
+        [HttpDelete]
+        [Authorize]
+        public async Task<ActionResult<ResponseDTO>> DeleteProduct(Guid ProductId)
+        {
+            var result = await _products.GetArtPieceById(ProductId);
+            if (result == null)
+            {
+                _response.Result = "No Product was found associated with that ID";
+                return NotFound(_response);
+
+            }
+            var returnValue = await _products.DeleteArtPiece(result);
+            _response.Result = returnValue;
+            _response.isSuccess = true;
+            return Ok(_response);
+
         }
     }
 }
