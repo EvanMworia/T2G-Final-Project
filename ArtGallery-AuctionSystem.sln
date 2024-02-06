@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "AuthService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailService", "MailService\MailService.csproj", "{CB722C9D-E8FD-4D6E-94B5-BF3070B73B6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StripePayment", "StripePayment\StripePayment.csproj", "{29C97865-DDFE-4AEA-99C5-0441C2428E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StripePayment", "StripePayment\StripePayment.csproj", "{29C97865-DDFE-4AEA-99C5-0441C2428E62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

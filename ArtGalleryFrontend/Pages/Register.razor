@@ -1,40 +1,46 @@
 ﻿@inject NavigationManager navigationManager
+@inject IAuth authService
 @page "/register"
 
 <div class="form-container ">
     <div class="card shadow col-6 form-structure">
         <h2 class="form-title">Sign Up For Our Art </h2><h2 class="gold-colored-text form-title">Gallery</h2>
 
-   <EditForm  Model="user" OnInvalidSubmit="DisplayName">
+        <EditForm Model="newUser" OnValidSubmit="RegisterUser">
             <DataAnnotationsValidator/>
                 <ValidationSummary/>
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="Name">Name</label>
 
-               <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="Name" @bind-Value="newUser.UserName" aria-describedby="name" />
             </div>
         <div class="form-group p-2">
-            <label for="name">Name</label>
+                <label for="UserName">UserName</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="UserName" @bind-Value="newUser.Name" aria-describedby="name" />
         </div>
         <div class="form-group p-2">
-            <label for="name">Name</label>
+                <label for="Email">Email</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="Email" @bind-Value="newUser.Email" aria-describedby="name" />
         </div>
         <div class="form-group p-2">
-            <label for="name">Name</label>
+                <label for="PhoneNumber">PhoneNumber</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="PhoneNumber" @bind-Value="newUser.PhoneNumber" aria-describedby="name" />
         </div>
         <div class="form-group p-2">
-            <label for="name">Name</label>
+                <label for="Role">Role</label>
 
-            <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="Role" @bind-Value="newUser.Role" aria-describedby="name" />
+        </div>
+        <div class="form-group p-2">
+                <label for="Password">Password</label>
+
+                <InputText class="form-control p-2" id="Password" @bind-Value="newUser.Password" aria-describedby="name" />
         </div>
         <div class=" button-container">
-            <button class="form-button" @onclick="login">Register</button>
+            <button class="form-button">Register</button>
         </div>
    </EditForm>
     
@@ -43,13 +49,11 @@
 
 
 @code{
-    private UserDTO user = new UserDTO();
-    public void DisplayName() {
-        Console.WriteLine(user.UserName);
-    }
-
-    private void login()
+    private RegisterRequestDTO newUser = new RegisterRequestDTO();
+    private async Task RegisterUser()
     {
-        navigationManager.NavigateTo("login"); 
+        await authService.Register(newUser);
+        Console.WriteLine("Email Shoud be sent");
+        navigationManager.NavigateTo("/login");
     }
 }

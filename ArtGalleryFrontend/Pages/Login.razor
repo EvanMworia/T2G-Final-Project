@@ -1,5 +1,9 @@
 ﻿@page "/login"
+
 @inject UserStateService _stateService
+@inject IAuth authInterface
+@inject ILocalStorageService localStorage
+@inject AuthenticationStateProvider authProvider
 @inject NavigationManager _navigate
 @* inject http client *@
 
@@ -9,23 +13,23 @@
     <div class="card shadow col-6 form-structure" style="height: 60vh">
             <h2 class="form-title">Welcome, Sign In To</h2><h2 class="gold-colored-text form-title">Browse The Gallery</h2>
 
-        <EditForm Model="logUser" OnValidSubmit="LoginUser">
+        <EditForm Model="user" OnValidSubmit="loginUser">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="form-group p-2">
-                <label for="name">UserName:</label>
+                <label for="UserName">UserName:</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="logUser.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="UserName" @bind-Value="user.UserName" aria-describedby="name" />
             </div>
         
             <div class="form-group p-2">
-                <label for="name">Password:</label>
+                <label for="Password">Password:</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="logUser.Password" aria-describedby="name" />
+                <InputText class="form-control p-2" id="Password" @bind-Value="user.Password" aria-describedby="name" />
             </div>
 
                 <div class=" button-container">
-                <button class="form-button">Log In</button>
+                <button class="form-button" >Log In</button>
                 </div>
 
         </EditForm>
@@ -36,37 +40,21 @@
 
 
 @code {
-    private LoginRequestDTO logUser = new LoginRequestDTO();
-    private List<UserDTO> users = new List<UserDTO>();
+    private LoginRequestDTO user = new LoginRequestDTO();
 
-    protected override async Task OnInitializedAsync()
+    private async Task loginUser()
     {
-        var usersData = await _httpClient.GetFromJsonAsync<List<UserDTO>>("sample-data/users.json");
-        if (usersData.Any())
-        {  
-            users = usersData;        }   
+        var res = await authInterface.Login(user);
+        //Console.WriteLine(res.Token);
 
-    }
-    public void LoginUser()
-    {
-        var user = users.Find(user => user.UserName == logUser.UserName);
-        if (user == null)
+        if (!string.IsNullOrWhiteSpace(res.Token))
         {
-            Console.WriteLine("Invalid Credentials");
-
+            await localStorage.SetItemAsStringAsync("authToken", res.Token);
+            await authProvider.GetAuthenticationStateAsync();
+            _navigate.NavigateTo("/browse-items");
         }
 
-        if (user.Role == "admin")
-        {
-            _stateService.SetRoleAdmin();
-            _navigate.NavigateTo("/dashboard");
-        }
-        else
-        {
-            _stateService.SetRoleUser(); 
-            _navigate.NavigateTo("/");
-        }
-        
+
     }
    
 }
