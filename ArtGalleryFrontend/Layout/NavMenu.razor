@@ -1,8 +1,11 @@
 ﻿@inject NavigationManager navigationManager
 @inject UserStateService _userState
+@inject AuthenticationStateProvider authProvider
+@inject ILocalStorageService localStorage
 
 @if (_userState.IsAdmin)
 {
+    
    @* --------------- this is the navMenu that will be shown if the role is of an admin-----------------*@
     <div class="top-row ps-3 navbar navbar-dark">
         <div class="container-fluid">
@@ -93,6 +96,11 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
+   
+    
+    
+
 }
 
 
@@ -100,6 +108,8 @@
 else
 {
     @* --------------- this is the navMenu that will be shown if the role is of a normal/regular user-----------------*@
+    <AuthorizeView>
+        <Authorized>
 
 
     <nav class="navbar mb-3 shadow navbar-expand-lg navbar-light bg-light ">
@@ -136,6 +146,9 @@ else
                 <li class="nav-item">
                     <a class="nav-link" href="#">How It Works</a>
                 </li>
+                <li class="nav-item">                            
+                    <button class="btn btn-danger" @onclick="logout"> Logout </button>
+                 </li>
             </ul>
         </div>
 
@@ -146,8 +159,11 @@ else
 
 
     </nav>
+        </Authorized>
+        
+    </AuthorizeView>
 
-    @code{
+ @code{
     private void sell()
     {
         navigationManager.NavigateTo("becomeseller");
@@ -156,5 +172,12 @@ else
     {
         navigationManager.NavigateTo("bidstatus");
     }
+
+    private async Task logout()
+    {
+        await localStorage.RemoveItemAsync("authToken");
+        await authProvider.GetAuthenticationStateAsync();
+        navigationManager.NavigateTo("/");
     }
+ }
 }

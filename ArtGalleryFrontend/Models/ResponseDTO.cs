@@ -2,10 +2,10 @@
 {
     public class ResponseDTO
     {
-        public object? Result { get; set; }
+        public string Errormessage { get; set; } = string.Empty;
+
+        public object Result { get; set; } = default!;
 
         public bool IsSuccess { get; set; } = true;
-
-        public string Message { get; set; } = string.Empty;
     }
 }

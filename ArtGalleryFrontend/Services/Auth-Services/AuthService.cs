@@ -14,7 +14,7 @@ namespace ArtGalleryFrontend.Services.AuthServices
         {
             _httpClient = httpClient;
         }
-       
+
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDto)
         {
             //Serialize Request Data: --It serializes the loginRequestDto object into a JSON string using JsonConvert.SerializeObject.
@@ -51,7 +51,7 @@ namespace ArtGalleryFrontend.Services.AuthServices
             }
             //Return Result:
             // If the login operation was successful(finalResult.IsSuccess is true), it deserializes the Result property of the finalResult object into a LoginResponseDTO object and returns it.
-            
+
             return new LoginResponseDTO();
         }
 
@@ -63,13 +63,11 @@ namespace ArtGalleryFrontend.Services.AuthServices
             StringContent bodyContent = new StringContent(stringfiedRequest, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.PostAsync($"{BASEURL}/api/User", bodyContent);
             string content = await response.Content.ReadAsStringAsync();
-            ResponseDTO? finalResult = JsonConvert.DeserializeObject<ResponseDTO>(content);
+            ResponseDTO finalResult = JsonConvert.DeserializeObject<ResponseDTO>(content);
 
-            if (finalResult.IsSuccess)
-            {
-                return finalResult;
-            }
-            return new ResponseDTO();
+            return finalResult;
+
+
         }
 
     }
