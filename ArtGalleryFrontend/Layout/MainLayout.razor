@@ -1,7 +1,10 @@
 ﻿@inherits LayoutComponentBase
 @inject UserStateService _userState
 
-@if (_userState.IsAdmin)
+
+
+
+@if (UsersRole == "Admin")
 {
     @* --------------- this is the MainLayout that will be shown if the role is of an admin-----------------*@
 
@@ -36,4 +39,19 @@ else
             @Body
         </div>
     </div>
+}
+
+@code{
+    [CascadingParameter]
+    public Task<AuthenticationState> authenticationState { get; set; }
+
+    public string UsersName { get; set; } = "";
+    public string UsersRole { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+       // var state = await authenticationState;
+       // UsersName = state.User.FindFirst("name")?.Value;
+       // UsersRole = state.User.FindFirst("role")?.Value;
+    }
 }

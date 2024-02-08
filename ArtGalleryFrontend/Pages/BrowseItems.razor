@@ -1,5 +1,6 @@
 ﻿@page "/browse-items";
 @inject NavigationManager navigationManager
+@inject IArt _artServices
 
 
 <div class="search-bar">
@@ -18,13 +19,13 @@
         <i class="bi bi-fire hot-deals-icon"></i>
         <h2 class="gold-colored-text ">HOT</h2><h2>DEALS</h2>
     </div>
-    @foreach (var piece in artpieces)
+    @foreach (var piece in Arts)
     {
         <div class="card shadow col-4 p-4 " style="width: 18rem;">
-            <img src="@piece.Image" class="card-img-top" alt="@piece.Name" />
+            <img src="@piece.ProductPicture" class="card-img-top" alt="@piece.ProductPicture" />
             <div class="card-body d-flex flex-column justify-content-center">
-                <h2 class="hot-deals-card-title">@piece.Name</h2>
-                <h7>@piece.Description</h7>
+                <h2 class="hot-deals-card-title">@piece.ProductName</h2>
+                <h7>@piece.HighestBid</h7>
 
             </div>
             <div class="card-button-container">
@@ -40,6 +41,12 @@
 
 
 @code {
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+
     private void register()
     {
         navigationManager.NavigateTo("register");
@@ -60,44 +67,14 @@
         // navigationManager.NavigateTo($"placebid/{id}");
     }
 
-    //---------------------- sample dummy auction products------------------------
-    public ArtProduct artProduct { get; set; } = new ArtProduct();
-    public List<ArtProduct> artpieces = new List<ArtProduct>()
+    public List<ArtDisplay> Arts { get; set; } = new List<ArtDisplay>();
+
+    public async Task LoadDataAsync()
     {
-        new ArtProduct
-        {
-            Id=1,
-            Name = "Deez",
-            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
-            Image ="https://images.pexels.com/photos/159862/art-school-of-athens-raphael-italian-painter-fresco-159862.jpeg?auto=compress&cs=tinysrgb&w=600"
-        },
-        new ArtProduct
-        {
-             Id=2,
-            Name = "Nutz",
-             Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
+        // Fetch ArtDto instances from the database using the ArtService
+        Arts = await _artServices.GetArtsAsync();
+    }
 
-            Image ="https://images.pexels.com/photos/20967/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=600"
-        },
-        new ArtProduct
-        {
-            Id=3,
-            Name = "GOT EM",
-            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
-
-            Image ="https://imgs.search.brave.com/7cVarpCPPkncVp53pa7GCzFBlhffFy-ZlHF0LuXDoSA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a2JtNzAuanBn"
-        },
-        new ArtProduct
-        {
-            Id=4,
-            Name = "Haha Got eeemmm!",
-            Description = "Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem Lorem ipsum Lorem",
-            Image ="https://imgs.search.brave.com/iDujDpr8HoyvEokaVXLgu1gjAfRLo6U5TPVYJMux4GY/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLmlt/Z2ZsaXAuY29tLzQv/a21jMXguanBn"
-        }
-
-
-
-
-    };
+    
 }
 

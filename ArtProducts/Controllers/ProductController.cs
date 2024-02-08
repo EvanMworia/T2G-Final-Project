@@ -50,7 +50,6 @@ namespace ArtProducts.Controllers
         }
        
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<ResponseDTO>> GetAllProducts()
         {
             var products = await _products.GetAllArtPieces();

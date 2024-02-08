@@ -71,9 +71,10 @@ namespace AuthService.Services
             var roles = await _userManager.GetRolesAsync(user);
 
             var token = _JwtServices.GenerateToken(user, roles);
-
+            loggeduser.Role = roles.FirstOrDefault();   
             var response = new LoginResponseDto()
             {
+                
                 User = loggeduser,
                 Token = token
             };

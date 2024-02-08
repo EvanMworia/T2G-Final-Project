@@ -1,39 +1,61 @@
-﻿@page "/registerArtPiece"
+﻿@inject IArt _artService
+@inject NavigationManager _navigate
+
+@page "/registerArtPiece"
 
 <div class="form-container ">
     <div class="card shadow col-6 form-structure">
         <h2 class="form-title">Register A Piece For</h2><h2 class="gold-colored-text form-title">Auction</h2>
 
-        <EditForm Model="user" OnInvalidSubmit="DisplayName">
+        <EditForm Model="artPiece" OnValidSubmit="PopulateProduct">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="SellerName">SellerName</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="SellerName" @bind-Value="artPiece.SellerName" aria-describedby="name" />
             </div>
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="ProductName">ProductName</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="ProductName" @bind-Value="artPiece.ProductName" aria-describedby="name" />
             </div>
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="ProductPicture">ProductPicture</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="ProductPicture" @bind-Value="artPiece.ProductPicture" aria-describedby="name" />
+            </div>
+
+
+            <div class="form-group p-2">
+                <label for="CategoryId">CategoryId</label>
+
+                <InputSelect class="form-control p-2" id="CategoryId" @bind-Value="artPiece.CategoryId" aria-describedby="name"> 
+                    <option value"">choose category</option>
+                    <option value"">painting</option>
+                    <option value"">photography</option>
+                    <option value"">realism</option>
+                    
+                </InputSelect>
+            </div>
+
+            <div class="form-group p-2">
+                <label for="StartBidPrice">StartBidPrice</label>
+
+                <InputNumber class="form-control p-2" id="StartBidPrice" @bind-Value="artPiece.StartBidPrice" aria-describedby="name" />
             </div>
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="Status">Status</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputText class="form-control p-2" id="Status" @bind-Value="artPiece.Status" aria-describedby="name" />
             </div>
             <div class="form-group p-2">
-                <label for="name">Name</label>
+                <label for="EndDate">EndDate</label>
 
-                <InputText class="form-control p-2" id="name" @bind-Value="user.UserName" aria-describedby="name" />
+                <InputDate class="form-control p-2" id="EndDate" @bind-Value="artPiece.EndDate" aria-describedby="name" />
             </div>
             <div class=" button-container">
-            <button class="form-button">Register</button>
+                <button class="form-button">Sell</button>
             </div>
         </EditForm>
 
@@ -42,9 +64,15 @@
 
 
 @code {
-    private UserDTO user = new UserDTO();
-    public void DisplayName()
+    private AddArtPieceDTO artPiece = new AddArtPieceDTO();
+
+    private async Task PopulateProduct()
     {
-        Console.WriteLine(user.UserName);
+        var result = await _artService.AddArt(artPiece);
+        _navigate.NavigateTo("/browse-items");
+
     }
+
+    
+
 }

@@ -1,4 +1,5 @@
 using ArtGalleryFrontend;
+using ArtGalleryFrontend.Services.ArtProduct_Services;
 using ArtGalleryFrontend.Services.AuthServices;
 using ArtGalleryFrontend.UtilityService;
 using Blazored.LocalStorage;
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IAuth, AuthService>();
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvideService>();
+builder.Services.AddScoped<IArt, ArtsService>();
 
 
 await builder.Build().RunAsync();

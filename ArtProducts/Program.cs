@@ -33,6 +33,15 @@ builder.Services.AddScoped<IProducts, ProductServices>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
+
+builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
+{
+    
+    build.AllowAnyOrigin();
+    build.AllowAnyHeader();
+    build.AllowAnyMethod();
+}));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +52,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+
 //------REGISTER OUR SERVICE FOR AUTOMATIC PENDING MIGRATIONS TO BE APPLIED 
 app.UseMigrations();
 //----------------
@@ -50,6 +60,7 @@ app.UseMigrations();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("policy1");
 
 app.MapControllers();
 

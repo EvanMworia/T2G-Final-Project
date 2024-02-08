@@ -12,6 +12,15 @@
 <div class="form-container ">
     <div class="card shadow col-6 form-structure" style="height: 60vh">
             <h2 class="form-title">Welcome, Sign In To</h2><h2 class="gold-colored-text form-title">Browse The Gallery</h2>
+        
+
+        @*  Display Error Msg *@
+        @if (errorMessage != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @errorMessage
+            </div>
+        }
 
         <EditForm Model="user" OnValidSubmit="loginUser">
             <DataAnnotationsValidator />
@@ -22,10 +31,23 @@
                 <InputText class="form-control p-2" id="UserName" @bind-Value="user.UserName" aria-describedby="name" />
             </div>
         
-            <div class="form-group p-2">
+            @* <div class="form-group p-2">
                 <label for="Password">Password:</label>
 
                 <InputText class="form-control p-2" id="Password" @bind-Value="user.Password" aria-describedby="name" />
+            </div> *@
+
+            <div class="form-group p-2">
+                <label for="password">Password:</label>
+                <div class="input-group">
+                    <InputText type="@passwordFieldType" class="form-control p-2" id="password" @bind-Value="@user.Password" aria-describedby="name" />
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" @onclick="TogglePasswordVisibility">
+                            @passwordToggleIcon
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
                 <div class=" button-container">
@@ -41,20 +63,36 @@
 
 @code {
     private LoginRequestDTO user = new LoginRequestDTO();
+    private string passwordFieldType = "password";
+    private string passwordToggleIcon = "👁️";
+    
+    private string? errorMessage;
+
+
 
     private async Task loginUser()
     {
         var res = await authInterface.Login(user);
-        //Console.WriteLine(res.Token);
+
 
         if (!string.IsNullOrWhiteSpace(res.Token))
         {
             await localStorage.SetItemAsStringAsync("authToken", res.Token);
             await authProvider.GetAuthenticationStateAsync();
             _navigate.NavigateTo("/browse-items");
+            
         }
+        errorMessage = "Ensure Credentials are Correct";
 
 
+    }
+
+
+
+    private void TogglePasswordVisibility()
+    {
+        passwordFieldType = (passwordFieldType == "password") ? "text" : "password";
+        passwordToggleIcon = (passwordFieldType == "password") ? "👁️" : "👁️‍🗨️";
     }
    
 }

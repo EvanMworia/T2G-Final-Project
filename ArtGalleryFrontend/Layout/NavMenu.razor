@@ -3,8 +3,15 @@
 @inject AuthenticationStateProvider authProvider
 @inject ILocalStorageService localStorage
 
-@if (_userState.IsAdmin)
+
+
+
+
+@if (UsersRole == "Admin")
 {
+    <CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
     
    @* --------------- this is the navMenu that will be shown if the role is of an admin-----------------*@
     <div class="top-row ps-3 navbar navbar-dark">
@@ -86,8 +93,87 @@
             </div>
         </nav>
     </div>
+            </Authorized>
+                <NotAuthorized>
+                    <button class="btn btn-primary" @onclick="login"> Login </button>
+                    <button class="btn btn-primary" @onclick="register"> Register </button>
+                </NotAuthorized>
 
-    @code {
+        </AuthorizeView>
+    </CascadingAuthenticationState>
+    
+
+
+}
+else
+{
+    @* --------------- this is the navMenu that will be shown if the role is of a normal/regular user-----------------*@
+    <CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+
+
+                <nav class="navbar mb-3 shadow navbar-expand-lg navbar-light bg-light ">
+                    <span>
+                        <img src="images/pickasaw2-min.PNG" alt="my Logo" style="width:12rem" class="rounded" />
+                    </span>
+
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="browse-items">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <!-- Dropdown -->
+                                <div class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Art Houses
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#">Drawings</a>
+                                        <a class="dropdown-item" href="#">Paintings</a>
+                                        <a class="dropdown-item" href="#">Photography</a>
+                                        <a class="dropdown-item" href="#">Sculpture</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="registerArtPiece" @onclick="sell">Sell</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="bidstatus" @onclick="CheckBids">My Bids</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">How It Works</a>
+                            </li>
+                            <li class="nav-item">
+                                <button class="btn btn-danger" @onclick="logout"> Logout </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Toggle button for small screens -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+
+                </nav>
+            </Authorized>
+
+            <NotAuthorized>
+                <button class="btn btn-primary" @onclick="login"> Login </button>
+                <button class="btn btn-primary" @onclick="register"> Register </button>
+            </NotAuthorized>
+
+        </AuthorizeView>
+    </CascadingAuthenticationState>
+
+}
+
+ @code{
+
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -97,73 +183,20 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-   
     
+        [CascadingParameter]
+        public Task<AuthenticationState> authenticationState { get; set; }
+
+        public string UsersName { get; set; } = "";
+        public string UsersRole { get; set; } = "";
+
+        protected override async Task OnInitializedAsync()
+        {
+            var state = await authenticationState;
+            UsersName = state.User.FindFirst("name")?.Value;
+            UsersRole = state.User.FindFirst("role")?.Value;
+        }
     
-
-}
-
-
-}
-else
-{
-    @* --------------- this is the navMenu that will be shown if the role is of a normal/regular user-----------------*@
-    <AuthorizeView>
-        <Authorized>
-
-
-    <nav class="navbar mb-3 shadow navbar-expand-lg navbar-light bg-light ">
-        <span>
-            <img src="images/pickasaw2-min.PNG" alt="my Logo" style="width:12rem" class="rounded" />
-        </span>
-
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <!-- Dropdown -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Art Houses
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Drawings</a>
-                            <a class="dropdown-item" href="#">Paintings</a>
-                            <a class="dropdown-item" href="#">Photography</a>
-                            <a class="dropdown-item" href="#">Sculpture</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="becomeseller" @onclick="sell">Sell</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="bidstatus" @onclick="CheckBids">My Bids</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">How It Works</a>
-                </li>
-                <li class="nav-item">                            
-                    <button class="btn btn-danger" @onclick="logout"> Logout </button>
-                 </li>
-            </ul>
-        </div>
-
-        <!-- Toggle button for small screens -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-    </nav>
-        </Authorized>
-        
-    </AuthorizeView>
-
- @code{
     private void sell()
     {
         navigationManager.NavigateTo("becomeseller");
@@ -179,5 +212,15 @@ else
         await authProvider.GetAuthenticationStateAsync();
         navigationManager.NavigateTo("/");
     }
+
+    private void register()
+    {
+        navigationManager.NavigateTo("register");
+    }
+
+
+    private void login()
+    {
+        navigationManager.NavigateTo("login");
+    }
  }
-}
