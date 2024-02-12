@@ -10,11 +10,11 @@
         <EditForm Model="artPiece" OnValidSubmit="PopulateProduct">
             <DataAnnotationsValidator />
             <ValidationSummary />
-            <div class="form-group p-2">
+          @*   <div class="form-group p-2">
                 <label for="SellerName">SellerName</label>
 
                 <InputText class="form-control p-2" id="SellerName" @bind-Value="artPiece.SellerName" aria-describedby="name" />
-            </div>
+            </div> *@
             <div class="form-group p-2">
                 <label for="ProductName">ProductName</label>
 
@@ -69,6 +69,7 @@
     private async Task PopulateProduct()
     {
         var result = await _artService.AddArt(artPiece);
+        
         _navigate.NavigateTo("/browse-items");
 
     }

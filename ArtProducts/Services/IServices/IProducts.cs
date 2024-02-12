@@ -6,7 +6,7 @@ namespace ArtProducts.Services.IServices
 {
     public interface IProducts
     {
-        Task<ResponseDTO> AddArtProduct(AddArtPieceDTO addPieceDTO);
+        Task<ResponseDTO> AddArtProduct(ArtPiece addPieceDTO);
         Task<ArtPiece> GetArtPieceById(Guid id);
         Task<List<ArtPiece>> GetAllArtPieces();
         Task<string> DeleteArtPiece(ArtPiece piece);

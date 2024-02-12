@@ -23,12 +23,10 @@ namespace ArtProducts.Services
         }
 
 
-        public async Task<ResponseDTO> AddArtProduct(AddArtPieceDTO addPieceDTO)
+        public async Task<ResponseDTO> AddArtProduct(ArtPiece artPiece)
         {
             try
             {
-                var artPiece = _mapper.Map<ArtPiece>(addPieceDTO);
-                artPiece.HighestBid = addPieceDTO.StartBidPrice;
                  _context.ArtPieces.Add(artPiece);
                 await _context.SaveChangesAsync();
                 _responseDTO.Message = "Art Piece Added Successfully";

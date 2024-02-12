@@ -6,6 +6,7 @@ using BiddingMS.Models.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ArtProducts.Controllers
 {
@@ -26,8 +27,13 @@ namespace ArtProducts.Controllers
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<ResponseDTO>> RegisterPiece(AddArtPieceDTO artPieceDTO)
-        { 
-            var response = await _products.AddArtProduct(artPieceDTO);
+        {
+            string? sellerId = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+            string? name = User.Claims.FirstOrDefault(claim => claim.Type == "name")?.Value;
+            ArtPiece artPiece = _mapper.Map<ArtPiece>(artPieceDTO);
+            artPiece.SellerID = Guid.Parse(sellerId); 
+            artPiece.SellerName = name; 
+            var response = await _products.AddArtProduct(artPiece);
            
             return Created("", response);
         }

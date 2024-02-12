@@ -1,6 +1,7 @@
 using ArtGalleryFrontend;
 using ArtGalleryFrontend.Services.ArtProduct_Services;
 using ArtGalleryFrontend.Services.AuthServices;
+using ArtGalleryFrontend.Services.Bid_Service;
 using ArtGalleryFrontend.UtilityService;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -26,6 +27,7 @@ builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvideService>();
 builder.Services.AddScoped<IArt, ArtsService>();
+builder.Services.AddScoped<IBid, BidService>();
 
 
 await builder.Build().RunAsync();

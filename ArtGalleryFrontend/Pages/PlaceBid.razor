@@ -2,48 +2,74 @@
 @* ------------thats wehen we will use the routing by fetching id -------------- *@
 
 @inject IArt _artService
-@* @page "/placebid/{id}" *@
-@page "/placebid"
+@inject IBid _bidService
+@inject NavigationManager _navigate
+
+
+@page "/placebid/{id}"
+@using ArtGalleryFrontend.Models.Bid_Models.DTOs
+@using ArtGalleryFrontend.Services.Bid_Service
 
 <div class="auction-container">
     <div class="left-section">
         <div class="big-display-picture">
-            @* <img src="@artPiece.Image[imageIndex]" /> *@
+            <img src="@artPiece.ProductPicture" />
         </div>
-        <div class="additional-images">
+        @* <div class="additional-images">
             <img src="/images/pexels-alena-koval-886521.jpg" alt="">
             <img src="/images/pexels-alena-koval-886521.jpg" alt="">
             <img src="/images/pexels-alena-koval-886521.jpg" alt="">
             <img src="/images/pexels-alena-koval-886521.jpg" alt="">
             <!-- Include four small image containers here -->
-        </div>
+        </div> *@
     </div>
     <div class="right-section">
         <div class="product-info">
             <p>Time Left: <span id="time-left">2 days</span></p>
-            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p>Name: @artPiece.ProductName</p>
             <div class="bid-section">
                 <label for="bid-amount">Place Your Bid:</label>
-                <input type="text" id="bid-amount" name="bid-amount" placeholder="Enter bid amount">
-                <button type="button" onclick="submitBid()">Submit Bid</button>
+                <EditForm Model="bidElement" OnValidSubmit="PopulateBidAmount">
+                <InputNumber @bind-Value="bidElement.Price" type="text" id="bid-amount" name="bid-amount" placeholder="Enter bid amount"/>
+
+                <button>Submit Bid</button>
+                </EditForm>
             </div>
         </div>
     </div>
 </div>
+@* <div>@id</div> *@
 @code {
     //-----------------USED FOR GETTING PAGE BY ID and populating image by index------------------
-        //------------Even the last OVVERRIDE METHOD (BOTTOM)------------------------
-    // [Parameter]
-    // public int id { get; set; }
-    public ArtProduct artPiece { get; set; } = new ArtProduct();
-    // public int imageIndex { get; set; } = 0;
+    //------------Even the last OVVERRIDE METHOD (BOTTOM)------------------------
+    [Parameter]
+    public string id { get; set; }
+    public ArtDto artPiece { get; set; } = new ArtDto();
+    public AddBidDTO bidElement { get; set; } = new AddBidDTO();
+    public int imageIndex { get; set; } = 0;
 
-    
+
     //--------------------------------------------------------------------------------
-    // protected override void OnInitialized()
-    // {
-    //     artPiece = artpieces.Find(piece => piece.Id == id);
-    // }
+    protected override async void OnInitialized()
+    {
+
+        artPiece = await _artService.GetArtByIdAsync(Guid.Parse(id));
+        Console.WriteLine($"art piece: {artPiece.ProductPicture}");
+        Console.WriteLine($"art id: {id}");
+
+    }
+
+    private async Task PopulateBidAmount()
+    {
+        bidElement.PieceId = artPiece.PieceId;
+        var result = await _bidService.PlaceBid(bidElement);
+        // Console.WriteLine(result.Errormessage);
+        // Console.WriteLine(result.Result);
+        Console.WriteLine(result);
+        Console.WriteLine("Bid Placed");
+        _navigate.NavigateTo("/browse-items");
+
+    }
 
 
 

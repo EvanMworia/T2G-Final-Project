@@ -30,6 +30,17 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //----------------OUR EXTERNAL HTTP CLIENT AND BASE URL-----------
 builder.Services.AddHttpClient("Product", productFetcher => productFetcher.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ServiceURl:ProgramService")));
 
+
+
+builder.Services.AddCors(options => options.AddPolicy("policy1", build =>
+{
+
+    build.AllowAnyOrigin();
+    build.AllowAnyHeader();
+    build.AllowAnyMethod();
+}));
+
+
 var app = builder.Build();
 
 
@@ -45,5 +56,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseCors("policy1");
 app.Run();

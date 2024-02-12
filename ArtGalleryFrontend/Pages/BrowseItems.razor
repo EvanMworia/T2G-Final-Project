@@ -25,12 +25,12 @@
             <img src="@piece.ProductPicture" class="card-img-top" alt="@piece.ProductPicture" />
             <div class="card-body d-flex flex-column justify-content-center">
                 <h2 class="hot-deals-card-title">@piece.ProductName</h2>
-                <h7>@piece.HighestBid</h7>
+                <h7>Highest Bid: @piece.HighestBid</h7>
 
             </div>
             <div class="card-button-container">
                 @* <button  class="btn btn-outline-success" @onclick="() => placebid(piece.Id)">See Details</button> *@
-                <button class="btn btn-outline-success" @onclick="placebid">See Details</button>
+                <button class="btn btn-outline-success" @onclick="() => placebid(piece.PieceId)">See Details</button>
             </div>
         </div>
 
@@ -58,12 +58,12 @@
     }
     //----REMBER TO PASS A PARAMETER OF ID
     // private void placebid(int id)
-    private void placebid()
+    private void placebid(Guid pieceId)
     {
         //------NOTE TO SELF---------
         //----REMEMBER TO SWITCH PAGES DEPENDING ON PRODUCTS ID----
         //----INORDER TO ALWAYS HIT A DIFFERENT PAGE EVERY TIME------
-        navigationManager.NavigateTo("placebid");
+        navigationManager.NavigateTo($"placebid/{pieceId}");
         // navigationManager.NavigateTo($"placebid/{id}");
     }
 
